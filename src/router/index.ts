@@ -1,9 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+const appName = import.meta.env.VITE_APPNAME;
+
+const catchAllRoute = {
+  path: '/:pathMatch(.*)*',
+  name: '404',
+  redirect: '/not-found',
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    { // Test page for anything
+      path: '/test',
+      name: 'test',
+      component: () => import('../views/FetchExample.vue'),
+      meta: {
+        title: 'Test'
+      }
+    },
     {
       path: '/',
       name: 'home',
@@ -18,9 +34,6 @@ const router = createRouter({
       meta: {
         title: 'About'
       },
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
     },
     {
@@ -39,11 +52,20 @@ const router = createRouter({
       },
       component: () => import('../views/BjjView.vue'),
     },
+    {
+      path: '/not-found',
+      name: 'not-found',
+      meta: {
+        title: 'Not Found'
+      },
+      component: () => import('../views/NotFoundView.vue'),
+    },
+    catchAllRoute
   ],
 })
-
+// Dynamically set the document title
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title as string
+  document.title = appName + " | " + to.meta.title as string
   next()
 })
 

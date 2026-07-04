@@ -5,20 +5,23 @@
   --background: #e3e3e3;
   --primary: #b91c1c;
   --secondary: #7f1d1d;
-  --accent: #f87171;;
+  --accent: #f87171;
+  --muted: #6b7280;
 }
 
 @theme {
   --color-text: var(--text);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --color-accent: var(--accent):
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #ffffff;
     --background: #101010;
+    --muted: #9ca3af;
   }
 }
 
